@@ -28,19 +28,20 @@ apt-fast -qy install vim-nox python3-powerline rsync ubuntu-drivers-common pytho
 env DEBIAN_FRONTEND=noninteractive APT_LISTCHANGES_FRONTEND=mail apt-fast full-upgrade -qy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold'
 sudo apt -qy autoremove
 
-perl -ni.bak -e 'print unless /^\s*(PermitEmptyPasswords|PermitRootLogin|PasswordAuthentication|ChallengeResponseAuthentication)/' /etc/ssh/sshd_config
-cat << 'EOF' >> /etc/ssh/sshd_config
-PasswordAuthentication no
-ChallengeResponseAuthentication no
-PermitEmptyPasswords no
-PermitRootLogin no
-EOF
-# broken because WSL doesn't yet support systemd
-# Support was just added, but not yet out of preview
-# see here for details:
-# https://ubuntu.com/blog/ubuntu-wsl-enable-systemd
-#
-#systemctl reload ssh
-service ssh restart
+# disable ssh setup
+# perl -ni.bak -e 'print unless /^\s*(PermitEmptyPasswords|PermitRootLogin|PasswordAuthentication|ChallengeResponseAuthentication)/' /etc/ssh/sshd_config
+# cat << 'EOF' >> /etc/ssh/sshd_config
+# PasswordAuthentication no
+# ChallengeResponseAuthentication no
+# PermitEmptyPasswords no
+# PermitRootLogin no
+# EOF
+# # broken because WSL doesn't yet support systemd
+# # Support was just added, but not yet out of preview
+# # see here for details:
+# # https://ubuntu.com/blog/ubuntu-wsl-enable-systemd
+# #
+# #systemctl reload ssh
+# service ssh restart
 
 python -m pip install pip -Uq
