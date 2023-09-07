@@ -23,7 +23,7 @@ case "$SHELL" in
 esac
 
 echo Downloading installer...
-curl -LO --no-progress-meter $DOWNLOAD
+curl -LO $DOWNLOAD
 bash Mambaforge-*.sh -b
 
 ~/mambaforge/bin/conda init $SHELL_NAME
